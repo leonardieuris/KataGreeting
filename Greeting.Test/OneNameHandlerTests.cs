@@ -1,6 +1,5 @@
-﻿using NUnit.Framework;
-using Moq;
-using Greeting.Chain;
+﻿using Greeting.Chain;
+using NUnit.Framework;
 
 namespace Greeting.Test
 {
@@ -11,11 +10,7 @@ namespace Greeting.Test
         [SetUp]
         public void Setup()
         {
-            var mock= new Mock<IGreetingHandler>();
-            mock.Setup(x => x.Handle("Andrea")).Returns("Hello, Andrea.");
-            mock.Setup(x => x.Handle("ANDREA")).Returns("HELLO, ANDREA!");
-            _sut = mock.Object;
-          
+            _sut = new OneNameHandler();
         }
 
         [Test]

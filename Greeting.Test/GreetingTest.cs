@@ -1,3 +1,5 @@
+using Greeting.Chain;
+using Greeting.Ioc;
 using NUnit.Framework;
 
 namespace Greeting.Test
@@ -9,12 +11,11 @@ namespace Greeting.Test
         [SetUp]
         public void Setup()
         {
-
-            _sut = null;
+            var greetingHandler = Container.GetService<IGreetingHandler>();
+            _sut = new Greeting(greetingHandler);
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Add_Greeting_To_Name()
         {
             var expected = "Hello, Andrea.";
@@ -24,7 +25,6 @@ namespace Greeting.Test
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Handle_Null_Name()
         {
             var expected = "Hello, my friend.";
@@ -34,7 +34,6 @@ namespace Greeting.Test
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Handle_Uppercase_Name()
         {
             var expected = "HELLO, ANDREA!";
@@ -44,7 +43,6 @@ namespace Greeting.Test
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Handle_Two_Name()
         {
             var expected = "Hello, Andrea and Franco.";
@@ -54,7 +52,6 @@ namespace Greeting.Test
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Handle_Multiple_Name()
         {
             var expected = "Hello, Andrea, Franco and Giuseppe.";
@@ -64,7 +61,6 @@ namespace Greeting.Test
         }
 
         [Test]
-        [Ignore("Temp")]
         public void Should_Handle_Multiple_Name_With_Upper()
         {
             var expected = "Hello, Andrea and Franco. AND HELLO GIUSEPPE!";
@@ -73,5 +69,13 @@ namespace Greeting.Test
             Assert.AreEqual(expected, actual);
         }
         
+        [Test]
+        [Ignore("SandBox test")]
+        public void SandBox()
+        {
+            var actual = _sut.Greet("Andrea", "Franco", "GIUSEPPE", "Paperino", "\"h, Z\"");
+
+            Assert.Pass(actual);
+        }
     }
 }
